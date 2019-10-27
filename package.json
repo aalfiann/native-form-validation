@@ -1,0 +1,24 @@
+{
+  "name": "native-form-validation",
+  "version": "1.0.0",
+  "description": "Universal JavaScript Form Validation.",
+  "main": "dist/formvalidation.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aalfiann/native-form-validation.git"
+  },
+  "keywords": [
+    "form-validation",
+    "javascript-validation",
+    "simple-validation"
+  ],
+  "author": "M ABD AZIZ ALFIAN",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aalfiann/native-form-validation/issues"
+  },
+  "homepage": "https://github.com/aalfiann/native-form-validation#readme"
+}
