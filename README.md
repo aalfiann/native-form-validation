@@ -2,30 +2,45 @@
 [![NPM](https://nodei.co/npm/native-form-validation.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/native-form-validation/)  
   
 [![npm version](https://img.shields.io/npm/v/native-form-validation.svg?style=flat-square)](https://www.npmjs.org/package/native-form-validation)
-![License](https://img.shields.io/npm/l/fly-json-odm)
-![NPM download/month](https://img.shields.io/npm/dm/fly-json-odm.svg)
-![NPM download total](https://img.shields.io/npm/dt/fly-json-odm.svg)
+![License](https://img.shields.io/npm/l/native-form-validation)
+![NPM download/month](https://img.shields.io/npm/dm/native-form-validation.svg)
+![NPM download total](https://img.shields.io/npm/dt/native-form-validation.svg)
 
-Universal JavaScript Form Validation for Browser.
+Native JavaScript Form Validation for Browser.
 
 ### Background
-There is a lot of `Form Validation`, but mostly of them was created for `jQuery` and too bloated. This is an `universal` javascript form validation which is can be use for all kind of javascript UI framework.
+There is a lot of `Form Validation`, but most of them was created for `jQuery` and too bloated. This is an `native` javascript form validation which is can be use for all kind of javascript UI framework.
 
 ### Install using NPM
 ```bash
 $ npm install native-form-validation
+
+// then use with path
+<script src="node_modules/native-form-validation/dist/formvalidation.min.js"></script>
 ```
 
 **Or simply use with CDN**
 ```html
-<script src="https://cdn.jsdelivr.net/npm/native-form-validation@1.0.0/dist/formvalidation.min.js"></script>
+<!-- Always get the latest version -->
+<!-- Not recommended for production sites! -->
+<script src="https://cdn.jsdelivr.net/npm/native-form-validation/dist/formvalidation.min.js"></script>
+
+<!-- Get minor updates and patch fixes within a major version -->
+<script src="https://cdn.jsdelivr.net/npm/native-form-validation@1/dist/formvalidation.min.js"></script>
+
+<!-- Get patch fixes within a minor version -->
+<script src="https://cdn.jsdelivr.net/npm/native-form-validation@1.0/dist/formvalidation.min.js"></script>
+
+<!-- Get a specific version -->
+<!-- Recommended for production sites! -->
+<script src="https://cdn.jsdelivr.net/npm/native-form-validation@1.0.1/dist/formvalidation.min.js"></script>
 ```
 
 ### Usage
 ```javascript
 var FV = new FormValidation();
 
-// Set the rules
+// Create the rules
 FV.rules({
     username: {
         required: true,

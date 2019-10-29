@@ -1,5 +1,5 @@
 /*!
- * FormValidation ES6 v1.0.0
+ * FormValidation ES6 v1.0.1
  * https://github.com/aalfiann/native-form-validation
  *
  * Copyright 2019 M ABD AZIZ ALFIAN
@@ -8,13 +8,34 @@
  */
 class FormValidation {
 
-    error = [];
+    constructor() {
+        // error messages list
+        this.error = []; 
+    }
+
+    /**
+     * Determine value is found
+     * @param {*} value
+     * @return {bool} 
+     */
     _isFound(value) {
         return value !== undefined && value !== null;
     }
+
+    /**
+     * Determine value is found and not empty
+     * @param {*} value
+     * @return {bool} 
+     */
     _isNotEmpty(value) {
         return this._isFound(value) && value !== '';
     }
+
+    /**
+     * Determine is error messages exists
+     * @param {string} name     this is the element name
+     * @return {bool} 
+     */
     _isErrorExist(name) {
         var result = false;
         var len = this.error.length;
@@ -26,6 +47,12 @@ class FormValidation {
         }
         return result;
     }
+
+    /**
+     * Get error message from list
+     * @param {string} name     this is the element name
+     * @return {string} 
+     */
     _getErrorMessage(name) {
         var result = '';
         var len = this.error.length;
@@ -37,11 +64,18 @@ class FormValidation {
         }
         return result;
     }
-    _pushError(element,key,message) {
-        if(this._isFound(element)) {
-            this.error.push({element:key,message:element});
+
+    /**
+     * Push error message to list
+     * @param {string} customMessage    this is the custom message value if any 
+     * @param {string} elementName      this is the element name 
+     * @param {string} defaultMessage   this is the default message if no any custom message
+     */
+    _pushError(customMessage,elementName,defaultMessage) {
+        if(this._isFound(customMessage)) {
+            this.error.push({element:elementName,message:customMessage});
         } else {
-            this.error.push({element:key,message:message});
+            this.error.push({element:elementName,message:defaultMessage});
         }
     }
 
@@ -66,16 +100,29 @@ class FormValidation {
     }
 
     /**
+     * Determine validate is valid
+     * @return {bool}
+     */
+    isValid() {
+        return (this.error.length === 0);
+    }
+
+    /**
      * Make validation
      * @param {fn} callback     [optional] Callback(error)
      * @return {this} 
      */
     validate(callback){
-        // reset error
+        // reset error messages list
         this.error = [];
+
         for(var key in this.rules) {
+
+            // detect single element
             if(this._isNotEmpty(this.single)) key = this.single;
+
             if(this.rules.hasOwnProperty(key)) {
+
                 // trim first
                 if(!this._isFound(this.rules[key]['trim']) || this.rules[key]['trim']) {
                     var div = document.getElementById(key);
@@ -158,30 +205,25 @@ class FormValidation {
                     }
                 }
             }
+
+            // cleanup single element
             if(this._isNotEmpty(this.single)) {
                 this.single = '';
                 break;
             }
+
         }
+
+        // if use callback
         if(typeof callback === "function") {
-            if( this.error.length > 0 ) {
+            if(!this.isValid()) {
                 callback(this.error);
             } else {
                 callback(null);
             }
         }
-        return this;
-    }
 
-    /**
-     * Determine validate is valid
-     * @return {bool}
-     */
-    isValid() {
-        if( this.error.length > 0 ) {
-            return false;
-        }
-        return true;
+        return this;
     }
 
 }

@@ -1,8 +1,8 @@
 {
   "name": "native-form-validation",
-  "version": "1.0.0",
-  "description": "Universal JavaScript Form Validation.",
-  "main": "dist/formvalidation.js",
+  "version": "1.0.1",
+  "description": "Native JavaScript Form Validation.",
+  "main": "src/formvalidation.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
