@@ -2,6 +2,7 @@
 [![NPM](https://nodei.co/npm/native-form-validation.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/native-form-validation/)
 
 [![npm version](https://img.shields.io/npm/v/native-form-validation.svg?style=flat-square)](https://www.npmjs.org/package/native-form-validation)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/aalfiann/native-form-validation/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/aalfiann/native-form-validation/tree/master)
 ![License](https://img.shields.io/npm/l/native-form-validation)
 ![NPM download/month](https://img.shields.io/npm/dm/native-form-validation.svg)
 ![NPM download total](https://img.shields.io/npm/dt/native-form-validation.svg)
