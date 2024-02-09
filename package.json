@@ -1,10 +1,15 @@
 {
   "name": "native-form-validation",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Native JavaScript Form Validation.",
   "main": "src/formvalidation.js",
+  "types": "src/formvalidation.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "browserify": "browserify src/formvalidation.js --s FormValidation -o dist/formvalidation.js",
+    "babel": "babel dist/formvalidation.js --out-file dist/formvalidation.js",
+    "minify": "uglifyjs dist/formvalidation.js -c -m -o dist/formvalidation.min.js",
+    "build": "semistandard && npm run browserify && npm run babel && npm run minify",
+    "test": "semistandard && nyc --reporter=html --reporter=text mocha"
   },
   "repository": {
     "type": "git",
@@ -13,6 +18,7 @@
   "keywords": [
     "form-validation",
     "javascript-validation",
+    "typescript-validation",
     "simple-validation"
   ],
   "author": "M ABD AZIZ ALFIAN",
@@ -20,5 +26,25 @@
   "bugs": {
     "url": "https://github.com/aalfiann/native-form-validation/issues"
   },
-  "homepage": "https://github.com/aalfiann/native-form-validation#readme"
+  "homepage": "https://github.com/aalfiann/native-form-validation#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.23.9",
+    "@babel/core": "^7.23.9",
+    "@babel/plugin-transform-spread": "^7.23.3",
+    "@babel/preset-env": "^7.23.9",
+    "@types/node": "^20.11.17",
+    "browserify": "^17.0.0",
+    "mocha": "^10.3.0",
+    "mocha-lcov-reporter": "^1.3.0",
+    "nyc": "^15.1.0",
+    "semistandard": "^17.0.0",
+    "typescript": "^5.3.3",
+    "uglify-js": "^3.17.4"
+  },
+  "semistandard": {
+    "ignore": [
+      "dist/*",
+      "src/*.ts"
+    ]
+  }
 }

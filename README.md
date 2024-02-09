@@ -1,6 +1,6 @@
 # Native Form Validation
-[![NPM](https://nodei.co/npm/native-form-validation.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/native-form-validation/)  
-  
+[![NPM](https://nodei.co/npm/native-form-validation.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/native-form-validation/)
+
 [![npm version](https://img.shields.io/npm/v/native-form-validation.svg?style=flat-square)](https://www.npmjs.org/package/native-form-validation)
 ![License](https://img.shields.io/npm/l/native-form-validation)
 ![NPM download/month](https://img.shields.io/npm/dm/native-form-validation.svg)
@@ -15,7 +15,13 @@ There is a lot of `Form Validation`, but most of them was created for `jQuery` a
 ```bash
 $ npm install native-form-validation
 
-// then use with path
+// load using require in nodejs
+const FormValidation = require('native-form-validation');
+
+// or load using import in typescript
+import * as FormValidation from 'native-form-validation';
+
+// or load use with path for client side
 <script src="node_modules/native-form-validation/dist/formvalidation.min.js"></script>
 ```
 
@@ -29,11 +35,11 @@ $ npm install native-form-validation
 <script src="https://cdn.jsdelivr.net/npm/native-form-validation@1/dist/formvalidation.min.js"></script>
 
 <!-- Get patch fixes within a minor version -->
-<script src="https://cdn.jsdelivr.net/npm/native-form-validation@1.0/dist/formvalidation.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/native-form-validation@1.1/dist/formvalidation.min.js"></script>
 
 <!-- Get a specific version -->
 <!-- Recommended for production sites! -->
-<script src="https://cdn.jsdelivr.net/npm/native-form-validation@1.0.1/dist/formvalidation.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/native-form-validation@1.1.0/dist/formvalidation.min.js"></script>
 ```
 
 ### Usage
@@ -64,11 +70,19 @@ FV.rules({
     }
 });
 
-// Validate
+// Validate all
 FV.validate();
 
-// is Valid
+// Determine is Valid all
 if(FV.isValid()) {
+    // run your code
+}
+
+// Validate per element
+FV.element('username').validate();
+
+// Determine is Valid per element
+if(FV.element('username').isValid()) {
     // run your code
 }
 ```
