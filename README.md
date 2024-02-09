@@ -3,11 +3,13 @@
 
 [![npm version](https://img.shields.io/npm/v/native-form-validation.svg?style=flat-square)](https://www.npmjs.org/package/native-form-validation)
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/aalfiann/native-form-validation/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/aalfiann/native-form-validation/tree/master)
+[![Known Vulnerabilities](https://snyk.io//test/github/aalfiann/native-form-validation/badge.svg?targetFile=package.json)](https://snyk.io//test/github/aalfiann/native-form-validation?targetFile=package.json)
 ![License](https://img.shields.io/npm/l/native-form-validation)
 ![NPM download/month](https://img.shields.io/npm/dm/native-form-validation.svg)
 ![NPM download total](https://img.shields.io/npm/dt/native-form-validation.svg)
+[![](https://data.jsdelivr.com/v1/package/npm/native-form-validation/badge)](https://www.jsdelivr.com/package/npm/native-form-validation)
 
-Native JavaScript Form Validation for Browser.
+Native JavaScript Form Validation for Browser / UI Framework.
 
 ### Background
 There is a lot of `Form Validation`, but most of them was created for `jQuery` and too bloated. This is an `native` javascript form validation which is can be use for all kind of javascript UI framework.
@@ -20,7 +22,7 @@ $ npm install native-form-validation
 const FormValidation = require('native-form-validation');
 
 // or load using import in typescript
-import * as FormValidation from 'native-form-validation';
+import FormValidation from 'native-form-validation';
 
 // or load use with path for client side
 <script src="node_modules/native-form-validation/dist/formvalidation.min.js"></script>
@@ -40,7 +42,7 @@ import * as FormValidation from 'native-form-validation';
 
 <!-- Get a specific version -->
 <!-- Recommended for production sites! -->
-<script src="https://cdn.jsdelivr.net/npm/native-form-validation@1.1.0/dist/formvalidation.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/native-form-validation@1.1.1/dist/formvalidation.min.js"></script>
 ```
 
 ### Usage

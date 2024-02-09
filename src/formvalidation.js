@@ -1,5 +1,5 @@
 /*!
- * FormValidation ES6 v1.1.0
+ * FormValidation ES6 v1.1.1
  * https://github.com/aalfiann/native-form-validation
  *
  * Copyright 2019 M ABD AZIZ ALFIAN

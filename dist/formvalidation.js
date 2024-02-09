@@ -54,7 +54,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
   }()({
     1: [function (require, module, exports) {
       /*!
-       * FormValidation ES6 v1.1.0
+       * FormValidation ES6 v1.1.1
        * https://github.com/aalfiann/native-form-validation
        *
        * Copyright 2019 M ABD AZIZ ALFIAN

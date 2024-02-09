@@ -69,7 +69,7 @@ declare class FormValidation {
      * @param {fn} callback     [optional] Callback(error)
      * @return {this}
      */
-    validate(callback: Function): this;
+    validate(callback?: Function): this;
     reset(): this;
 }
 
