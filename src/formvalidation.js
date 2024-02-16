@@ -1,5 +1,5 @@
 /*!
- * FormValidation ES6 v1.1.1
+ * FormValidation ES6 v1.2.0
  * https://github.com/aalfiann/native-form-validation
  *
  * Copyright 2019 M ABD AZIZ ALFIAN
@@ -58,6 +58,17 @@ class FormValidation {
       }
     }
     return result;
+  }
+
+  /**
+   * Delete error message
+   * @param {string} elementName
+   */
+  _deleteError (elementName) {
+    if (this._isErrorExist(elementName)) {
+      const filtered = this.error.filter(function (item) { return item.element !== elementName; });
+      this.error = [...filtered];
+    }
   }
 
   /**
@@ -132,7 +143,6 @@ class FormValidation {
       // detect single element
       if (this._isNotEmpty(this.single)) key = this.single;
 
-      // if (this.rules.hasOwnProperty(key)) {
       if (Object.prototype.hasOwnProperty.call(this.rules, key)) {
         // trim first
         if (!this._isFound(this.rules[key].trim) || this.rules[key].trim) {
@@ -206,7 +216,6 @@ class FormValidation {
         // error Add Class
         if (this._isFound(this.rules[key].errorAddClass)) {
           for (const el in this.rules[key].errorAddClass) {
-            // if (this.rules[key].errorAddClass.hasOwnProperty(el)) {
             if (Object.prototype.hasOwnProperty.call(this.rules[key].errorAddClass, el)) {
               const div = document.getElementById(el);
               if (this._isArray(this.rules[key].errorAddClass[el])) {
@@ -246,6 +255,62 @@ class FormValidation {
     return this;
   }
 
+  /**
+   * Set Custom Error Message for single element
+   * @param {string} errMessage
+   * @return {this}
+   */
+  setCustomError (errMessage) {
+    let key = '';
+    if (this._isNotEmpty(this.single)) {
+      key = this.single;
+
+      // delete existing error element
+      this._deleteError(key);
+
+      // add new error message
+      this.error.push({ element: key, message: errMessage });
+
+      // errorPlace
+      if (this._isFound(this.rules[key].errorPlace) && this.rules[key].errorPlace) {
+        const div = document.getElementById(this.rules[key].errorPlace);
+        div.innerHTML = '';
+        div.style.visibility = 'hidden';
+        if (this._isErrorExist(key)) {
+          div.innerHTML += this._getErrorMessage(key);
+          div.style.visibility = 'visible';
+        }
+      }
+
+      // error Add Class
+      if (this._isFound(this.rules[key].errorAddClass)) {
+        for (const el in this.rules[key].errorAddClass) {
+          if (Object.prototype.hasOwnProperty.call(this.rules[key].errorAddClass, el)) {
+            const div = document.getElementById(el);
+            if (this._isArray(this.rules[key].errorAddClass[el])) {
+              for (let i = 0; i < this.rules[key].errorAddClass[el].length; i++) {
+                div.classList.remove(this.rules[key].errorAddClass[el][i]);
+                if (this._isErrorExist(key)) {
+                  div.classList.add(this.rules[key].errorAddClass[el][i]);
+                }
+              }
+            } else {
+              div.classList.remove(this.rules[key].errorAddClass[el]);
+              if (this._isErrorExist(key)) {
+                div.classList.add(this.rules[key].errorAddClass[el]);
+              }
+            }
+          }
+        }
+      }
+    }
+    return this;
+  }
+
+  /**
+   * Reset form validation
+   * @return {this}
+   */
   reset () {
     // reset error messages list
     this.error = [];
@@ -254,7 +319,6 @@ class FormValidation {
       // detect single element
       if (this._isNotEmpty(this.single)) key = this.single;
 
-      // if (this.rules.hasOwnProperty(key)) {
       if (Object.prototype.hasOwnProperty.call(this.rules, key)) {
         // errorPlace
         if (this._isFound(this.rules[key].errorPlace) && this.rules[key].errorPlace) {
@@ -266,7 +330,6 @@ class FormValidation {
         // error Add Class
         if (this._isFound(this.rules[key].errorAddClass)) {
           for (const el in this.rules[key].errorAddClass) {
-            // if (this.rules[key].errorAddClass.hasOwnProperty(el)) {
             if (Object.prototype.hasOwnProperty.call(this.rules[key].errorAddClass, el)) {
               const div = document.getElementById(el);
               if (this._isArray(this.rules[key].errorAddClass[el])) {

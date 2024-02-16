@@ -74,4 +74,17 @@ describe('validation function test', () => {
     assert.deepStrictEqual(form.error[0].message, 'This field is required!');
     assert.deepStrictEqual(form.error[1].message, 'Field is required!');
   });
+
+  it('push error, delete it and then show error list', () => {
+    const form = new FormValidation();
+    form._pushError(null, 'username', 'Field username is required!');
+    form._pushError(null, 'username', 'Field username is required!');
+    form._pushError(null, 'password', 'Field password is required!');
+    form._pushError(null, 'confirm-password', 'Field confirm-password is required!');
+    assert.deepStrictEqual(form.error[1].element, 'username');
+    assert.deepStrictEqual(form.error.length, 4);
+    form._deleteError('username');
+    assert.deepStrictEqual(form.error[1].element, 'confirm-password');
+    assert.deepStrictEqual(form.error.length, 2);
+  });
 });

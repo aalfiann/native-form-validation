@@ -54,7 +54,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
   }()({
     1: [function (require, module, exports) {
       /*!
-       * FormValidation ES6 v1.1.1
+       * FormValidation ES6 v1.2.0
        * https://github.com/aalfiann/native-form-validation
        *
        * Copyright 2019 M ABD AZIZ ALFIAN
@@ -122,6 +122,21 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
               }
             }
             return result;
+          }
+
+          /**
+           * Delete error message
+           * @param {string} elementName
+           */
+        }, {
+          key: "_deleteError",
+          value: function _deleteError(elementName) {
+            if (this._isErrorExist(elementName)) {
+              var filtered = this.error.filter(function (item) {
+                return item.element !== elementName;
+              });
+              this.error = [].concat(filtered);
+            }
           }
 
           /**
@@ -212,8 +227,6 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
             for (var key in this.rules) {
               // detect single element
               if (this._isNotEmpty(this.single)) key = this.single;
-
-              // if (this.rules.hasOwnProperty(key)) {
               if (Object.prototype.hasOwnProperty.call(this.rules, key)) {
                 // trim first
                 if (!this._isFound(this.rules[key].trim) || this.rules[key].trim) {
@@ -287,7 +300,6 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
                 // error Add Class
                 if (this._isFound(this.rules[key].errorAddClass)) {
                   for (var el in this.rules[key].errorAddClass) {
-                    // if (this.rules[key].errorAddClass.hasOwnProperty(el)) {
                     if (Object.prototype.hasOwnProperty.call(this.rules[key].errorAddClass, el)) {
                       var _div2 = document.getElementById(el);
                       if (this._isArray(this.rules[key].errorAddClass[el])) {
@@ -325,6 +337,66 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
             }
             return this;
           }
+
+          /**
+           * Set Custom Error Message for single element
+           * @param {string} errMessage
+           */
+        }, {
+          key: "setCustomError",
+          value: function setCustomError(errMessage) {
+            var key = '';
+            if (this._isNotEmpty(this.single)) {
+              key = this.single;
+
+              // delete existing error element
+              this._deleteError(key);
+
+              // add new error message
+              this.error.push({
+                element: key,
+                message: errMessage
+              });
+
+              // errorPlace
+              if (this._isFound(this.rules[key].errorPlace) && this.rules[key].errorPlace) {
+                var div = document.getElementById(this.rules[key].errorPlace);
+                div.innerHTML = '';
+                div.style.visibility = 'hidden';
+                if (this._isErrorExist(key)) {
+                  div.innerHTML += this._getErrorMessage(key);
+                  div.style.visibility = 'visible';
+                }
+              }
+
+              // error Add Class
+              if (this._isFound(this.rules[key].errorAddClass)) {
+                for (var el in this.rules[key].errorAddClass) {
+                  if (Object.prototype.hasOwnProperty.call(this.rules[key].errorAddClass, el)) {
+                    var _div3 = document.getElementById(el);
+                    if (this._isArray(this.rules[key].errorAddClass[el])) {
+                      for (var i = 0; i < this.rules[key].errorAddClass[el].length; i++) {
+                        _div3.classList.remove(this.rules[key].errorAddClass[el][i]);
+                        if (this._isErrorExist(key)) {
+                          _div3.classList.add(this.rules[key].errorAddClass[el][i]);
+                        }
+                      }
+                    } else {
+                      _div3.classList.remove(this.rules[key].errorAddClass[el]);
+                      if (this._isErrorExist(key)) {
+                        _div3.classList.add(this.rules[key].errorAddClass[el]);
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          /**
+           * Reset form validation
+           * @returns {this}
+           */
         }, {
           key: "reset",
           value: function reset() {
@@ -333,8 +405,6 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
             for (var key in this.rules) {
               // detect single element
               if (this._isNotEmpty(this.single)) key = this.single;
-
-              // if (this.rules.hasOwnProperty(key)) {
               if (Object.prototype.hasOwnProperty.call(this.rules, key)) {
                 // errorPlace
                 if (this._isFound(this.rules[key].errorPlace) && this.rules[key].errorPlace) {
@@ -346,15 +416,14 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
                 // error Add Class
                 if (this._isFound(this.rules[key].errorAddClass)) {
                   for (var el in this.rules[key].errorAddClass) {
-                    // if (this.rules[key].errorAddClass.hasOwnProperty(el)) {
                     if (Object.prototype.hasOwnProperty.call(this.rules[key].errorAddClass, el)) {
-                      var _div3 = document.getElementById(el);
+                      var _div4 = document.getElementById(el);
                       if (this._isArray(this.rules[key].errorAddClass[el])) {
                         for (var i = 0; i < this.rules[key].errorAddClass[el].length; i++) {
-                          _div3.classList.remove(this.rules[key].errorAddClass[el][i]);
+                          _div4.classList.remove(this.rules[key].errorAddClass[el][i]);
                         }
                       } else {
-                        _div3.classList.remove(this.rules[key].errorAddClass[el]);
+                        _div4.classList.remove(this.rules[key].errorAddClass[el]);
                       }
                     }
                   }

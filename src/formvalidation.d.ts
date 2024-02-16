@@ -1,5 +1,5 @@
 /*!
- * FormValidation ES6 v1.1.0
+ * FormValidation ES6 v1.2.0
  * https://github.com/aalfiann/native-form-validation
  *
  * Copyright 2019 M ABD AZIZ ALFIAN
@@ -34,6 +34,11 @@ declare class FormValidation {
      * @return {bool}
      */
     _isErrorExist(name: string): boolean;
+    /**
+     * Delete error message
+     * @param {string} elementName
+     */
+    _deleteError(elementName: string): void;
     /**
      * Get error message from list
      * @param {string} name     this is the element name
@@ -70,6 +75,16 @@ declare class FormValidation {
      * @return {this}
      */
     validate(callback?: Function): this;
+    /**
+     * Set Custom Error Message for single element
+     * @param {string} errMessage
+     * @return {this}
+     */
+    setCustomError(errMessage: string): this;
+    /**
+     * Reset form validation
+     * @return {this}
+     */
     reset(): this;
 }
 
