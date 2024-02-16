@@ -42,7 +42,7 @@ import FormValidation from 'native-form-validation';
 
 <!-- Get a specific version -->
 <!-- Recommended for production sites! -->
-<script src="https://cdn.jsdelivr.net/npm/native-form-validation@1.2.0/dist/formvalidation.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/native-form-validation@1.2.1/dist/formvalidation.min.js"></script>
 ```
 
 ### Usage

@@ -54,7 +54,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
   }()({
     1: [function (require, module, exports) {
       /*!
-       * FormValidation ES6 v1.2.0
+       * FormValidation ES6 v1.2.1
        * https://github.com/aalfiann/native-form-validation
        *
        * Copyright 2019 M ABD AZIZ ALFIAN
@@ -341,6 +341,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
           /**
            * Set Custom Error Message for single element
            * @param {string} errMessage
+           * @return {this}
            */
         }, {
           key: "setCustomError",
@@ -391,11 +392,12 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
                 }
               }
             }
+            return this;
           }
 
           /**
            * Reset form validation
-           * @returns {this}
+           * @return {this}
            */
         }, {
           key: "reset",
