@@ -1,5 +1,5 @@
 /*!
- * FormValidation ES6 v1.2.1
+ * FormValidation ES6 v1.3.0
  * https://github.com/aalfiann/native-form-validation
  *
  * Copyright 2019 M ABD AZIZ ALFIAN
@@ -16,6 +16,12 @@ declare class FormValidation {
      * @returns
      */
     _isArray(value: any): boolean;
+    /**
+     * Determine value is object
+     * @param {*} value
+     * @returns
+     */
+    _isObject(value: any): boolean;
     /**
      * Determine value is found
      * @param {*} value
@@ -58,6 +64,19 @@ declare class FormValidation {
      * @return {this}
      */
     rules(rules: object): this;
+    /**
+     * Add a rule
+     * @param {string} id       this is the element id
+     * @param {object} objRules this is the object rules per id
+     * @return {this}
+     */
+    add(id: string, objRules: object): this;
+    /**
+     * Remove a rule
+     * @param {string | string[]} id this is the element id
+     * @return {this}
+     */
+    remove(id: string | string[]): this;
     /**
      * Set element for single validation
      * @param {string} id       this is the element id

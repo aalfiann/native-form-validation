@@ -1,5 +1,5 @@
 /*!
- * FormValidation ES6 v1.2.1
+ * FormValidation ES6 v1.3.0
  * https://github.com/aalfiann/native-form-validation
  *
  * Copyright 2019 M ABD AZIZ ALFIAN
@@ -23,6 +23,15 @@ class FormValidation {
       return false;
     }
     return value && value !== '' && typeof value === 'object' && value.constructor === Array;
+  }
+
+  /**
+   * Determine value is object
+   * @param {*} value
+   * @returns {bool}
+   */
+  _isObject (value) {
+    return value !== null && typeof value === 'object' && !Array.isArray(value) && !(value instanceof Date);
   }
 
   /**
@@ -109,6 +118,36 @@ class FormValidation {
    */
   rules (rules) {
     this.rules = rules;
+    return this;
+  }
+
+  /**
+   * Add a rule
+   * @param {string} id       this is the element id
+   * @param {object} objRules this is the object rules per id
+   * @return {this}
+   */
+  add (id, objRules) {
+    if (!this._isObject(this.rules)) {
+      this.rules = {};
+    }
+    this.rules[id] = objRules;
+    return this;
+  }
+
+  /**
+   * Remove a rule
+   * @param {string|array} id this is the element id
+   * @return {this}
+   */
+  remove (id) {
+    if (Array.isArray(id)) {
+      id.forEach(key => {
+        delete this.rules[key];
+      });
+    } else {
+      delete this.rules[id];
+    }
     return this;
   }
 

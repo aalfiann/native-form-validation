@@ -15,6 +15,18 @@ describe('validation function test', () => {
     assert.deepEqual(form._isArray({}), false);
   });
 
+  it('is object', () => {
+    const form = new FormValidation();
+    assert.deepEqual(form._isObject({}), true);
+    assert.deepEqual(form._isObject([]), false);
+    assert.deepEqual(form._isObject(undefined), false);
+    assert.deepEqual(form._isObject(null), false);
+    assert.deepEqual(form._isObject(42), false);
+    assert.deepEqual(form._isObject('Hello'), false);
+    assert.deepEqual(form._isObject(new Date()), false);
+    assert.deepEqual(form._isObject(function () { }), false);
+  });
+
   it('is found', () => {
     const form = new FormValidation();
     assert.deepEqual(form._isFound(['abc']), true);
@@ -86,5 +98,140 @@ describe('validation function test', () => {
     form._deleteError('username');
     assert.deepStrictEqual(form.error[1].element, 'confirm-password');
     assert.deepStrictEqual(form.error.length, 2);
+  });
+
+  it('add a rule', () => {
+    const form = new FormValidation();
+    form.rules({
+      username: {
+        required: true,
+        message: 'Username must be min 3-20 chars!',
+        minLength: 3,
+        maxLength: 20,
+        errorPlace: 'username-error',
+        errorAddClass: {
+          username_group: 'has-danger',
+          username: 'is-invalid'
+        }
+      }
+    });
+    assert.deepStrictEqual(form.rules.username.required, true);
+    form.add('address', {
+      required: true,
+      message: 'Address must be min 10 chars!',
+      minLength: 10,
+      errorPlace: 'address-error',
+      errorAddClass: {
+        address_group: 'has-danger',
+        address: 'is-invalid'
+      }
+    });
+    assert.deepStrictEqual(form.rules.address.required, true);
+  });
+
+  it('remove single or many rules', () => {
+    const form = new FormValidation();
+    form.rules({
+      username: {
+        required: true,
+        message: 'Username must be min 3-20 chars!',
+        minLength: 3,
+        maxLength: 20,
+        errorPlace: 'username-error',
+        errorAddClass: {
+          username_group: 'has-danger',
+          username: 'is-invalid'
+        }
+      },
+      address: {
+        required: true,
+        message: 'Address must be min 10 chars!',
+        minLength: 10,
+        errorPlace: 'address-error',
+        errorAddClass: {
+          address_group: 'has-danger',
+          address: 'is-invalid'
+        }
+      },
+      email: {
+        required: true,
+        message: 'Email must be valid!',
+        errorPlace: 'email-error',
+        errorAddClass: {
+          email_group: 'has-danger',
+          email: 'is-invalid'
+        }
+      }
+    });
+    form.remove('username');
+    assert.deepStrictEqual(form.rules.username, undefined);
+    assert.deepStrictEqual(form.rules.address.required, true);
+
+    form.add('username', {
+      required: true,
+      message: 'Username must be min 3-20 chars!',
+      minLength: 3,
+      maxLength: 20,
+      errorPlace: 'username-error',
+      errorAddClass: {
+        username_group: 'has-danger',
+        username: 'is-invalid'
+      }
+    });
+
+    assert.deepStrictEqual(form.rules.username.required, true);
+    assert.deepStrictEqual(form.rules.email.required, true);
+    assert.deepStrictEqual(form.rules.address.required, true);
+
+    form.remove(['email', 'address']);
+    assert.deepStrictEqual(form.rules.username.required, true);
+    assert.deepStrictEqual(form.rules.email, undefined);
+    assert.deepStrictEqual(form.rules.address, undefined);
+  });
+
+  it('remove a rule with a wrong id, will skip it', () => {
+    const form = new FormValidation();
+    form.rules({
+      username: {
+        required: true,
+        message: 'Username must be min 3-20 chars!',
+        minLength: 3,
+        maxLength: 20,
+        errorPlace: 'username-error',
+        errorAddClass: {
+          username_group: 'has-danger',
+          username: 'is-invalid'
+        }
+      }
+    });
+    form.remove('tester');
+    assert.deepStrictEqual(form.rules.username.required, true);
+  });
+
+  it('add a rule without set rules at first is ok', () => {
+    const form = new FormValidation();
+    form.add('username', {
+      required: true,
+      message: 'Username must be min 3-20 chars!',
+      minLength: 3,
+      maxLength: 20,
+      errorPlace: 'username-error',
+      errorAddClass: {
+        username_group: 'has-danger',
+        username: 'is-invalid'
+      }
+    }).add('address', {
+      required: true,
+      message: 'Address must be min 10 chars!',
+      minLength: 10,
+      errorPlace: 'address-error',
+      errorAddClass: {
+        address_group: 'has-danger',
+        address: 'is-invalid'
+      }
+    });
+    assert.deepStrictEqual(form.rules.username.required, true);
+    assert.deepStrictEqual(form.rules.address.required, true);
+    assert.deepStrictEqual(form._isObject(form.rules), true);
   });
 });

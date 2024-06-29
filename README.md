@@ -38,11 +38,11 @@ import FormValidation from 'native-form-validation';
 <script src="https://cdn.jsdelivr.net/npm/native-form-validation@1/dist/formvalidation.min.js"></script>
 
 <!-- Get patch fixes within a minor version -->
-<script src="https://cdn.jsdelivr.net/npm/native-form-validation@1.2/dist/formvalidation.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/native-form-validation@1.3/dist/formvalidation.min.js"></script>
 
 <!-- Get a specific version -->
 <!-- Recommended for production sites! -->
-<script src="https://cdn.jsdelivr.net/npm/native-form-validation@1.2.1/dist/formvalidation.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/native-form-validation@1.3.0/dist/formvalidation.min.js"></script>
 ```
 
 ### Usage
