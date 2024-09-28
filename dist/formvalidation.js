@@ -54,14 +54,14 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
   }()({
     1: [function (require, module, exports) {
       /*!
-       * FormValidation ES6 v1.3.0
+       * FormValidation ES6 v1.4.0
        * https://github.com/aalfiann/native-form-validation
        *
        * Copyright 2019 M ABD AZIZ ALFIAN
        * Released under the MIT license
        * https://github.com/aalfiann/native-form-validation/blob/master/LICENSE
        */
-      /* eslint no-eval: 0 */
+      /* eslint no-new-func: 0 */
       var FormValidation = /*#__PURE__*/function () {
         function FormValidation() {
           _classCallCheck(this, FormValidation);
@@ -310,7 +310,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
                       var keyMethod = this.rules[key].method;
                       var fn = void 0;
                       if (typeof keyMethod === 'string') {
-                        fn = eval(keyMethod);
+                        fn = new Function('return ' + keyMethod)();
                       } else {
                         fn = keyMethod;
                       }

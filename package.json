@@ -1,6 +1,6 @@
 {
   "name": "native-form-validation",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Native JavaScript Form Validation.",
   "main": "src/formvalidation.js",
   "types": "src/formvalidation.d.ts",

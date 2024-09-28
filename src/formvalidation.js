@@ -1,12 +1,12 @@
 /*!
- * FormValidation ES6 v1.3.0
+ * FormValidation ES6 v1.4.0
  * https://github.com/aalfiann/native-form-validation
  *
  * Copyright 2019 M ABD AZIZ ALFIAN
  * Released under the MIT license
  * https://github.com/aalfiann/native-form-validation/blob/master/LICENSE
  */
-/* eslint no-eval: 0 */
+/* eslint no-new-func: 0 */
 class FormValidation {
   constructor () {
     // error messages list
@@ -219,7 +219,7 @@ class FormValidation {
               const keyMethod = this.rules[key].method;
               let fn;
               if (typeof keyMethod === 'string') {
-                fn = eval(keyMethod);
+                fn = new Function('return ' + keyMethod)();
               } else {
                 fn = keyMethod;
               }
